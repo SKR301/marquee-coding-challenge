@@ -1,20 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Search from './pages/search';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Set up completely!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	return (
+		<View style={styles.container}>
+			<Search />
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 });
