@@ -8,10 +8,6 @@ export default function Search() {
 
 	const [companies, setCompanies] = useState([]);
 
-	// const parseHTMLResp = (input) = {
-
-	// }
-
 	const inputChangeHandeler = () => {
 		axios.post('https://www.zaubacorp.com/custom-search', {search: "s", filter: "company"},{
 				"body": "search=s&filter=company",
@@ -26,6 +22,10 @@ export default function Search() {
 			});
 	}
 
+	const onDataPressHandler = () => {
+
+	}
+
 	const onSearchPressHandler = () => {
 
 	}
@@ -37,18 +37,21 @@ export default function Search() {
 	const companiesToRender = [];
 	companies.map((element, index) => {
 		companiesToRender.push(
-			<Text>{element}</Text>
+			<TouchableOpacity style={styles.company} key={index} onPress={()=>onDataPressHandler}>
+				<Text>{element}</Text>
+			</TouchableOpacity>
 		)
 	});
 
-
 	return (
 		<View style={styles.container}>
-			<TextInput style={styles.inputFormData} placeholder={'Enter search query...'} onChange={inputChangeHandeler}>
-			</TextInput>
-			<TouchableOpacity style={styles.searchBtn} onPress={onSearchPressHandler}>
-				<Text>Search</Text>
-			</TouchableOpacity>
+			<View style={styles.searchContainer}>
+				<TextInput style={styles.inputFormData} placeholder={'Enter search query...'} onChange={inputChangeHandeler}>
+				</TextInput>
+				<TouchableOpacity style={styles.searchBtn} onPress={onSearchPressHandler}>
+					<Text>Search</Text>
+				</TouchableOpacity>
+ 			</View>
 			<View>
 			{
 				companiesToRender
@@ -61,6 +64,11 @@ export default function Search() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	searchContainer: {
 		flexDirection: 'row',
 		backgroundColor: '#fff',
 		alignItems: 'center',
@@ -84,5 +92,9 @@ const styles = StyleSheet.create({
 		borderBottomRightRadius: 20,
 		padding: 15,
 		fontSize: 12,
+	},
+	company:{
+		fontSize: 20,
+		padding: 10,
 	}
 });
