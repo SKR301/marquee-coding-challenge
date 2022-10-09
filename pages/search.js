@@ -8,8 +8,8 @@ export default function Search() {
 
 	const [companies, setCompanies] = useState([]);
 
-	const inputChangeHandeler = () => {
-		axios.post('https://www.zaubacorp.com/custom-search', {search: "s", filter: "company"},{
+	const inputChangeHandeler = (val) => {
+		axios.post('https://www.zaubacorp.com/custom-search', {search: val, filter: "company"},{
 				"body": "search=s&filter=company",
 				"method": "POST",
 			}).then(({data}) => {
@@ -46,7 +46,7 @@ export default function Search() {
 	return (
 		<View style={styles.container}>
 			<View style={styles.searchContainer}>
-				<TextInput style={styles.inputFormData} placeholder={'Enter search query...'} onChange={inputChangeHandeler}>
+				<TextInput style={styles.inputFormData} placeholder={'Enter search query...'} onChange={() => inputChangeHandeler(event.text)}>
 				</TextInput>
 				<TouchableOpacity style={styles.searchBtn} onPress={onSearchPressHandler}>
 					<Text>Search</Text>
