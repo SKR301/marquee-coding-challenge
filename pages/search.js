@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 export default function Search() {
 
 	const [companies, setCompanies] = useState([]);
+	// const [selectedCompany, setSelectedCompany] = useState('');
+	const [inputData, setInputData] = useState('');
 
 	const inputChangeHandeler = (val) => {
 		axios.post('https://www.zaubacorp.com/custom-search', {search: val, filter: "company"},{
@@ -19,25 +21,27 @@ export default function Search() {
 					company.push(line.split('>')[1])
 				});
 				setCompanies(company);
+				setInputData(val);
 			});
 	}
 
-	const onDataPressHandler = () => {
-
+	const onDataPressHandler = (company) => {
+		setInputData(company);
+		setCompanies([]);
 	}
 
 	const onSearchPressHandler = () => {
-
+		
 	}
 
 	useEffect(()=>{
 		
-	},[companies]);
+	},[companies, inputData]);
 
 	const companiesToRender = [];
 	companies.map((element, index) => {
 		companiesToRender.push(
-			<TouchableOpacity style={styles.company} key={index} onPress={()=>onDataPressHandler}>
+			<TouchableOpacity style={styles.company} key={index} onPress={()=>onDataPressHandler(event.explicitOriginalTarget.innerHTML)}>
 				<Text>{element}</Text>
 			</TouchableOpacity>
 		)
@@ -45,17 +49,20 @@ export default function Search() {
 
 	return (
 		<View style={styles.container}>
+
 			<View style={styles.searchContainer}>
-				<TextInput style={styles.inputFormData} placeholder={'Enter search query...'} onChange={() => inputChangeHandeler(event.text)}>
+				<TextInput style={styles.inputFormData} value={inputData} placeholder={'Enter search query...'} onChange={() => inputChangeHandeler(event.text)}>
 				</TextInput>
 				<TouchableOpacity style={styles.searchBtn} onPress={onSearchPressHandler}>
 					<Text>Search</Text>
 				</TouchableOpacity>
  			</View>
+
 			<View>
 			{
 				companiesToRender
 			}
+			
 			</View>
 		</View>
 	);
