@@ -38,7 +38,7 @@ export default function Show() {
             }
             </View>
 
-            <TouchableOpacity style={styles.addCompanyBtn} onPress={() => navigate('/search')}>
+            <TouchableOpacity style={styles.addCompanyBtn} onPress={() => navigate('/')}>
                 <Text style={styles.addCompanyBtnText}>Add Company +</Text>
             </TouchableOpacity>
 

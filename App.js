@@ -8,7 +8,7 @@ export default function App() {
 		<View style={styles.container}>
 			<BrowserRouter>
 				<Routes>
-					<Route path='/search' element={<Search />} />
+					<Route path='/' element={<Search />} />
 					<Route path='/show' element={<Show />} />
 				</Routes>
 			</BrowserRouter>
