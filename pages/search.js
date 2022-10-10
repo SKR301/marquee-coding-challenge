@@ -58,7 +58,7 @@ export default function Search() {
 	companies.map((element, index) => {
 		companiesToRender.push(
 			<TouchableOpacity style={styles.company} key={index} onPress={()=>onDataPressHandler(index)}>
-				<Text>{element.name}</Text>
+				<Text style={styles.companyText}>{element.name}</Text>
 			</TouchableOpacity>
 		)
 	});
@@ -70,7 +70,7 @@ export default function Search() {
 				<TextInput style={styles.inputFormData} value={inputData} placeholder={'Enter search query...'} onChange={() => inputChangeHandeler(event.text)}>
 				</TextInput>
 				<TouchableOpacity style={styles.searchBtn} onPress={onSearchPressHandler}>
-					<Text>Search</Text>
+					<Text style={styles.searchBtnText}>Search</Text>
 				</TouchableOpacity>
  			</View>
 
@@ -98,26 +98,37 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	inputFormData: {
+		width: 1000,
 		backgroundColor: '#fff',
 		borderTopLeftRadius: 20,
 		borderBottomLeftRadius: 20,
 		padding: 15,
-		fontSize: 12,
+		fontSize: 20,
 		borderBottomWidth: 5,
 		borderRightWidth: 5,
 		borderTopWidth: 2,
 		borderLeftWidth: 2,
-		borderColor: '#aaa',
+		borderColor: '#098',
 	},
 	searchBtn: {
-		backgroundColor: '#aaa',
+		backgroundColor: '#098',
 		borderTopRightRadius: 20,
 		borderBottomRightRadius: 20,
 		padding: 15,
 		fontSize: 12,
 	},
+	searchBtnText: {
+		color: '#fff',
+		fontSize: 20,
+	},	
 	company:{
+		width: 750,
 		fontSize: 20,
 		padding: 10,
+		borderWidth: 2,
+		borderColor: '#aaa'
+	},
+	companyText: {
+		fontSize: 20,
 	}
 });
