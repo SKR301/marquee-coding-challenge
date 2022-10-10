@@ -16,6 +16,7 @@ Solution to Marquee first coding round challenge
   How to start the program:-
   1. Clone the repo.
   2. `yarn install --ignore-engines`
+  3. Create DB using the commented SQL commands in ***db.js*** file.
   3. configure database credentials in ***db.js*** file
   4. `node api.js`
   5. `expo start -web`
