@@ -32,7 +32,6 @@ app.get('/companies', (req, res) => {
 });
 
 app.post('/companies', (req, res) => {
-    console.log(`'${req.body.cin}', '${req.body.company}'`)
     client.query(`INSERT INTO companies(cin, company) VALUES ('${req.body.cin}', '${req.body.company}')`, (err, result) => {
         if(!err){
             res.send('Added successfully');

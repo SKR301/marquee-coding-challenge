@@ -1,11 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-web';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export default function Show() {
     const [rows, setRows] = useState([]);
+	const navigate = useNavigate();
     
     useEffect(() => {
 		axios.get('http://localhost:3000/companies')
@@ -37,7 +38,7 @@ export default function Show() {
             }
             </View>
 
-            <TouchableOpacity style={styles.addCompanyBtn}>
+            <TouchableOpacity style={styles.addCompanyBtn} onPress={() => navigate('/search')}>
                 <Text style={styles.addCompanyBtnText}>Add Company +</Text>
             </TouchableOpacity>
 

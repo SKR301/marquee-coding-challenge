@@ -1,8 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { Button, TouchableOpacity } from 'react-native-web';
+import { TouchableOpacity } from 'react-native-web';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export default function Search() {
 
@@ -11,6 +11,7 @@ export default function Search() {
 	const [cin, setCin] = useState('');
 	const [company, setCompany] = useState('');
 	const [inputData, setInputData] = useState('');
+	const navigate = useNavigate();
 
 	const inputChangeHandeler = (val) => {
 		axios.post('https://www.zaubacorp.com/custom-search', {search: val, filter: "company"},{
@@ -45,6 +46,7 @@ export default function Search() {
 		})
 		.then(({data}) => {
 			console.log(data);
+			navigate('/show');
 		})
 	}
 
