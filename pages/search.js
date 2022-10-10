@@ -7,7 +7,9 @@ import { useEffect, useState } from 'react';
 export default function Search() {
 
 	const [companies, setCompanies] = useState([]);
-	// const [selectedCompany, setSelectedCompany] = useState('');
+	const [index, setIndex] = useState(-1);
+	const [cin, setCin] = useState('');
+	const [company, setCompany] = useState('');
 	const [inputData, setInputData] = useState('');
 
 	const inputChangeHandeler = (val) => {
@@ -16,33 +18,45 @@ export default function Search() {
 			"method": "POST",
 		}).then(({data}) => {
 			data = data.split(' </div>')
-			let company = []
+			let companyDataList = [];
 			data.map((line, index) => {
-				company.push(line.split('>')[1])
+				try{
+					companyDataList.push({cin: line.split('>')[0].split('/')[2].split('"')[0], name: line.split('>')[1]});
+				} catch {
+
+				}
 			});
-			setCompanies(company);
+			setCompanies(companyDataList);
 			setInputData(val);
 		});
 	}
 
-	const onDataPressHandler = (company) => {
-		setInputData(company);
+	const onDataPressHandler = (index) => {
+		setInputData(companies[index].name);
+		setCin(companies[index].cin);
+		setCompany(companies[index].name);
 		setCompanies([]);
 	}
 
 	const onSearchPressHandler = () => {
-		
+		console.log(cin, company);
+		axios.post('http://localhost:3000/companies', {cin: cin, company: company},{
+			"method": "POST",
+		})
+		.then(({data}) => {
+			console.log(data);
+		})
 	}
 
 	useEffect(()=>{
 		
-	},[companies, inputData]);
+	},[company, inputData, cin, companies]);
 
 	const companiesToRender = [];
 	companies.map((element, index) => {
 		companiesToRender.push(
-			<TouchableOpacity style={styles.company} key={index} onPress={()=>onDataPressHandler(event.explicitOriginalTarget.innerHTML)}>
-				<Text>{element}</Text>
+			<TouchableOpacity style={styles.company} key={index} onPress={()=>onDataPressHandler(index)}>
+				<Text>{element.name}</Text>
 			</TouchableOpacity>
 		)
 	});
@@ -62,8 +76,8 @@ export default function Search() {
 			{
 				companiesToRender
 			}
-			
 			</View>
+		
 		</View>
 	);
 }

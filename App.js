@@ -6,8 +6,8 @@ import Show from './pages/show';
 export default function App() {
 	return (
 		<View style={styles.container}>
-			{/* <Search /> */}
-			<Show />
+			<Search />
+			{/* <Show /> */}
 		</View>
 	);
 }

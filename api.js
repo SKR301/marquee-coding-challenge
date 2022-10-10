@@ -31,12 +31,13 @@ app.get('/companies', (req, res) => {
     client.end;
 });
 
-app.post('/companies', async (req, res) => {
-    client.query(`INSERT INTO companies(id, cin, company) VALUES (${req.body.id}, ${req.body.cin}, ${req.body.company})`, (err, result) => {
+app.post('/companies', (req, res) => {
+    console.log(`'${req.body.cin}', '${req.body.company}'`)
+    client.query(`INSERT INTO companies(cin, company) VALUES ('${req.body.cin}', '${req.body.company}')`, (err, result) => {
         if(!err){
             res.send('Added successfully');
         } else {
-            res.send('Some error while adding');
+            console.log(err);
         }
     });
     client.end;

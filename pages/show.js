@@ -11,7 +11,6 @@ export default function Show() {
 		axios.get('http://localhost:3000/companies')
         .then(({data}) => {
             setRows(data);
-            // console.log(data)
 		})
         .catch((err) => {
             console.log(err);
@@ -32,15 +31,15 @@ export default function Show() {
 	return (
 		<View style={styles.container}>
 
-            <TouchableOpacity style={styles.addCompanyBtn}>
-                <Text>Add Company +</Text>
-            </TouchableOpacity>
-
             <View style={styles.table}>
-                {
-                    rowsToRender
-                }
+            {
+                rowsToRender
+            }
             </View>
+
+            <TouchableOpacity style={styles.addCompanyBtn}>
+                <Text style={styles.addCompanyBtnText}>Add Company +</Text>
+            </TouchableOpacity>
 
 		</View>
 	);
@@ -48,24 +47,33 @@ export default function Show() {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
     addCompanyBtn:{
-        
+        paddingHorizontal: 25,
+        paddingVertical: 15,
+        borderRadius: 20,
+        backgroundColor: '#098'
     },  
+    addCompanyBtnText: {
+        fontSize: 20,
+        color: '#fff'
+    },
     table: {
         flex: 1,
         flexDirection: 'column',
     },
     row: {
-        flex: 1,
         flexDirection: 'row',
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'center',
+        borderWidth: 2,
+        borderColor: '#aaa',
+        margin: 5,
+        paddingHorizontal: 100,
     },
     text: {
         padding: 20,
