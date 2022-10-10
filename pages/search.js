@@ -12,17 +12,17 @@ export default function Search() {
 
 	const inputChangeHandeler = (val) => {
 		axios.post('https://www.zaubacorp.com/custom-search', {search: val, filter: "company"},{
-				"body": "search=s&filter=company",
-				"method": "POST",
-			}).then(({data}) => {
-				data = data.split(' </div>')
-				let company = []
-				data.map((line, index) => {
-					company.push(line.split('>')[1])
-				});
-				setCompanies(company);
-				setInputData(val);
+			"body": "search=s&filter=company",
+			"method": "POST",
+		}).then(({data}) => {
+			data = data.split(' </div>')
+			let company = []
+			data.map((line, index) => {
+				company.push(line.split('>')[1])
 			});
+			setCompanies(company);
+			setInputData(val);
+		});
 	}
 
 	const onDataPressHandler = (company) => {

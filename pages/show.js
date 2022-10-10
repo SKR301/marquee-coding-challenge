@@ -2,13 +2,32 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-web';
+import axios from 'axios';
 
 export default function Show() {
-    const [data, setData] = useState({});
+    const [rows, setRows] = useState([]);
     
     useEffect(() => {
-        // getCompanies();
+		axios.get('http://localhost:3000/companies')
+        .then(({data}) => {
+            setRows(data);
+            // console.log(data)
+		})
+        .catch((err) => {
+            console.log(err);
+        });
     },[]);
+
+    const rowsToRender = [];
+
+    rows.map((row, index) => {
+        rowsToRender.push(
+            <View style={styles.row} key={index}>
+                <Text style={styles.text}>{row.cin}</Text>
+                <Text style={styles.text}>{row.company}</Text>
+            </View>
+        )
+    });
 
 	return (
 		<View style={styles.container}>
@@ -18,10 +37,9 @@ export default function Show() {
             </TouchableOpacity>
 
             <View style={styles.table}>
-                <View style={styles.row}>
-                    <Text style={styles.text}>CIN1</Text>
-                    <Text style={styles.text}>Company1</Text>
-                </View>
+                {
+                    rowsToRender
+                }
             </View>
 
 		</View>
